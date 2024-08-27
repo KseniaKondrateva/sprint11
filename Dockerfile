@@ -2,12 +2,10 @@ FROM golang:1.22.0
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY . . 
 
 RUN go mod download
 
-COPY *.go *.db ./
+RUN go build -o /parcel
 
-RUN CGO_ENABLE=0 GOOS=linux GOARCH=amd64 go build -o /my-app
-
-CMD ["/my-app"]
+CMD ["/parcel"]
